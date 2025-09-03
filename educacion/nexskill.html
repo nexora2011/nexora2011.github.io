@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark light">
+    <title>NexSkill - Habilidades de Alto Valor - NeXora</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/nexskill.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: var(--gradient-secondary);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .page-header h1 {
+            font-size: var(--font-size-5xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .breadcrumb i {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .nexskill-content {
+            padding: var(--spacing-2xl) 0;
+            background: rgba(22, 33, 62, 0.4);
+        }
+        
+        .nexskill-intro {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .nexskill-intro h2 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nexskill-intro p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .skills-section {
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-blue);
+        }
+        
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            color: white;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .skill-card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .skill-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+        
+        .skill-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+            text-align: left;
+        }
+        
+        .skill-features li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+        
+        .skill-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+        
+        .platforms-section {
+            background: rgba(26, 26, 46, 0.5);
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .platform-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .platform-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-blue);
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .platform-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-secondary);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            color: white;
+        }
+        
+        .platform-info h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .platform-info .platform-type {
+            color: var(--neon-blue);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .platform-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        .platform-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .platform-features li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+        
+        .platform-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+        }
+        
+        .platform-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+        
+        .cta-section {
+            background: var(--gradient-primary);
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .cta-section h2 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cta-section p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>NeXora</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../index.html#educacion">Educación</a></li>
+                    <li><a href="../index.html#servicios">Servicios</a></li>
+                    <li><a href="../index.html#productos">Productos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary">Iniciar Sesión</button>
+                    <button class="btn btn-primary">Registrarse</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html">Educación</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>NexSkill</span>
+            </div>
+            <h1>NexSkill - Habilidades de Alto Valor</h1>
+            <p>Desarrolla las habilidades blandas y competencias empresariales que marcan la diferencia en el mundo profesional actual</p>
+        </div>
+    </section>
+
+    <!-- NexSkill Content -->
+    <section class="nexskill-content">
+        <div class="container">
+            <div class="nexskill-intro">
+                <h2>Habilidades que Transforman Carreras</h2>
+                <p>NexSkill se enfoca en el desarrollo de competencias esenciales que van más allá de lo técnico. En un mundo donde la tecnología evoluciona rápidamente, las habilidades blandas se convierten en tu ventaja competitiva más valiosa. Aprende a liderar, comunicar y gestionar proyectos de manera efectiva.</p>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="skills-section">
+                <div class="section-header">
+                    <h2 class="section-title">Competencias Clave</h2>
+                    <p class="section-subtitle">Habilidades esenciales para el éxito profesional en cualquier industria</p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Liderazgo y Gestión de Equipos</h3>
+                        <p>Desarrolla la capacidad de inspirar, motivar y dirigir equipos hacia objetivos comunes</p>
+                        <ul class="skill-features">
+                            <li>Gestión de conflictos</li>
+                            <li>Delegación efectiva</li>
+                            <li>Motivación de equipos</li>
+                            <li>Desarrollo de talento</li>
+                            <li>Gestión del cambio</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Comenzar
+                        </a>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Comunicación Efectiva</h3>
+                        <p>Domina el arte de transmitir ideas de manera clara, persuasiva y adaptada a tu audiencia</p>
+                        <ul class="skill-features">
+                            <li>Presentaciones ejecutivas</li>
+                            <li>Comunicación escrita</li>
+                            <li>Escucha activa</li>
+                            <li>Persuasión e influencia</li>
+                            <li>Comunicación intercultural</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Comenzar
+                        </a>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Pensamiento Crítico y Creativo</h3>
+                        <p>Ejercita tu capacidad de analizar problemas complejos y generar soluciones innovadoras</p>
+                        <ul class="skill-features">
+                            <li>Análisis de problemas</li>
+                            <li>Generación de ideas</li>
+                            <li>Toma de decisiones</li>
+                            <li>Resolución creativa</li>
+                            <li>Innovación estratégica</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Comenzar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="platforms-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Plataformas de Desarrollo de Habilidades</h2>
+                <p class="section-subtitle">Accede a plataformas especializadas en el desarrollo de competencias empresariales y habilidades blandas</p>
+            </div>
+            
+            <div class="platforms-grid">
+                <!-- MindGrowth Platform -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>MindGrowth</h3>
+                            <div class="platform-type">Plataforma de Inteligencia Emocional</div>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        MindGrowth es la plataforma líder en desarrollo de inteligencia emocional y habilidades de autoconocimiento. Utiliza IA para personalizar tu desarrollo personal y profesional.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Evaluación de EQ personalizada</li>
+                        <li>Ejercicios de mindfulness y meditación</li>
+                        <li>Coaching virtual con IA</li>
+                        <li>Tracking de progreso emocional</li>
+                        <li>Comunidad de desarrollo personal</li>
+                    </ul>
+                    <div class="platform-actions">
+                        <a href="https://mindgrowth.com" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar MindGrowth
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Info
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LeadPro Platform -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>LeadPro</h3>
+                            <div class="platform-type">Plataforma de Liderazgo</div>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        LeadPro se especializa en el desarrollo de líderes ejecutivos y gerentes. Ofrece simulaciones de liderazgo, casos de estudio reales y mentoría con CEOs reconocidos.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Simulaciones de liderazgo</li>
+                        <li>Casos de estudio empresariales</li>
+                        <li>Mentoría con CEOs</li>
+                        <li>Evaluación 360° de liderazgo</li>
+                        <li>Certificaciones ejecutivas</li>
+                    </ul>
+                    <div class="platform-actions">
+                        <a href="https://leadpro.edu" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar LeadPro
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Info
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CommFlow Platform -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>CommFlow</h3>
+                            <div class="platform-type">Plataforma de Comunicación</div>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        CommFlow es la plataforma definitiva para mejorar tus habilidades de comunicación. Incluye práctica con IA, análisis de discursos y feedback en tiempo real.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Práctica de presentaciones con IA</li>
+                        <li>Análisis de lenguaje corporal</li>
+                        <li>Feedback en tiempo real</li>
+                        <li>Simulaciones de entrevistas</li>
+                        <li>Coaching de comunicación ejecutiva</li>
+                    </ul>
+                    <div class="platform-actions">
+                        <a href="https://commflow.io" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar CommFlow
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Info
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para Desarrollar tus Habilidades de Alto Valor?</h2>
+            <p>Las habilidades blandas son la clave del éxito en el mundo profesional actual. Únete a NexSkill y transforma tu carrera con competencias que nunca pasan de moda.</p>
+            <div class="cta-buttons">
+                <a href="contacto.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-phone"></i>
+                    Hablar con un Asesor
+                </a>
+                <a href="index.html" class="btn btn-outline btn-large">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver a Educación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeXora</h3>
+                    <p>Transformando el futuro con tecnología de vanguardia</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Secciones Educativas</h4>
+                    <ul>
+                        <li><a href="nexedu.html">NexEdu - Educación Académica</a></li>
+                        <li><a href="nexskill.html">NexSkill - Habilidades de Alto Valor</a></li>
+                        <li><a href="nextech.html">NexTech - Habilidades Tecnológicas</a></li>
+                        <li><a href="recursos.html">Recursos Gratuitos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> educacion@nexora.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeXora. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>

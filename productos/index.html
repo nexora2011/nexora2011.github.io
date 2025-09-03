@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark light">
+    <title>Productos Tecnológicos - NeXora</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/productos-index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: var(--gradient-primary);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .page-header h1 {
+            font-size: var(--font-size-5xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .breadcrumb i {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .products-overview {
+            padding: var(--spacing-2xl) 0;
+            background: rgba(26, 26, 46, 0.3);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-cyan);
+        }
+        
+        .product-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-4xl);
+            color: white;
+            margin: 0 auto var(--spacing-md);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+        
+        .product-info h3 {
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .product-info .category {
+            color: var(--neon-cyan);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .product-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .product-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-lg);
+            flex-grow: 1;
+        }
+        
+        .product-features span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .product-features i {
+            color: var(--neon-cyan);
+            font-size: var(--font-size-sm);
+        }
+        
+        .product-pricing {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-md);
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+        
+        .price {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: var(--neon-cyan);
+            display: block;
+        }
+        
+        .period {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: var(--font-size-sm);
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .comparison-section {
+            background: rgba(22, 33, 62, 0.4);
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .comparison-header {
+            background: var(--gradient-primary);
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .comparison-header h3 {
+            color: white;
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+        }
+        
+        .comparison-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-cell {
+            text-align: center;
+            padding: var(--spacing-sm);
+        }
+        
+        .comparison-cell.feature {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .comparison-cell.value {
+            color: white;
+        }
+        
+        .comparison-cell.value i {
+            color: var(--neon-cyan);
+            font-size: var(--font-size-lg);
+        }
+        
+        .cta-section {
+            background: var(--gradient-secondary);
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .cta-section h2 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cta-section p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+            
+            .comparison-cell.feature {
+                text-align: center;
+                font-weight: 600;
+                color: var(--neon-cyan);
+                border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+                padding-bottom: var(--spacing-xs);
+                margin-bottom: var(--spacing-xs);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>NeXora</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../index.html#educacion">Educación</a></li>
+                    <li><a href="../index.html#servicios">Servicios</a></li>
+                    <li><a href="../index.html#productos">Productos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary">Iniciar Sesión</button>
+                    <button class="btn btn-primary">Registrarse</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Productos</span>
+            </div>
+            <h1>Productos Tecnológicos</h1>
+            <p>Soluciones listas para usar que transforman la forma en que las empresas operan. Implementación inmediata con resultados garantizados.</p>
+        </div>
+    </section>
+
+    <!-- Products Overview -->
+    <section class="products-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestros Productos</h2>
+                <p class="section-subtitle">Descubre nuestra suite completa de soluciones tecnológicas empresariales</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>NeXora Security Suite</h3>
+                            <div class="category">Seguridad</div>
+                        </div>
+                    </div>
+                    <p class="product-description">
+                        Suite completa de seguridad para empresas con protección avanzada contra amenazas cibernéticas y cumplimiento normativo.
+                    </p>
+                    <div class="product-features">
+                        <span><i class="fas fa-check"></i> Firewall inteligente con IA</span>
+                        <span><i class="fas fa-check"></i> Detección de malware en tiempo real</span>
+                        <span><i class="fas fa-check"></i> Análisis de vulnerabilidades automático</span>
+                        <span><i class="fas fa-check"></i> Monitoreo de seguridad 24/7</span>
+                        <span><i class="fas fa-check"></i> Cumplimiento GDPR, HIPAA, SOX</span>
+                    </div>
+                    <div class="product-pricing">
+                        <span class="price">$99</span>
+                        <span class="period">/mes por usuario</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="security-suite.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Ver Detalles
+                        </a>
+                        <a href="contacto.html" class="btn btn-outline">
+                            <i class="fas fa-play"></i>
+                            Probar Gratis
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>NeXora Analytics</h3>
+                            <div class="category">Inteligencia de Negocios</div>
+                        </div>
+                    </div>
+                    <p class="product-description">
+                        Plataforma de análisis de datos en tiempo real para insights empresariales y toma de decisiones basada en datos.
+                    </p>
+                    <div class="product-features">
+                        <span><i class="fas fa-check"></i> Dashboards personalizables</span>
+                        <span><i class="fas fa-check"></i> Reportes automáticos inteligentes</span>
+                        <span><i class="fas fa-check"></i> Integración multi-fuente de datos</span>
+                        <span><i class="fas fa-check"></i> IA predictiva y machine learning</span>
+                        <span><i class="fas fa-check"></i> Alertas y notificaciones en tiempo real</span>
+                    </div>
+                    <div class="product-pricing">
+                        <span class="price">$149</span>
+                        <span class="period">/mes por usuario</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="analytics.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Ver Detalles
+                        </a>
+                        <a href="contacto.html" class="btn btn-outline">
+                            <i class="fas fa-play"></i>
+                            Probar Gratis
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-image">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3>NeXora Cloud Manager</h3>
+                            <div class="category">Gestión Cloud</div>
+                        </div>
+                    </div>
+                    <p class="product-description">
+                        Gestión centralizada de recursos en la nube con optimización automática, control de costos y escalabilidad inteligente.
+                    </p>
+                    <div class="product-features">
+                        <span><i class="fas fa-check"></i> Soporte multi-cloud (AWS, Azure, GCP)</span>
+                        <span><i class="fas fa-check"></i> Auto-scaling inteligente</span>
+                        <span><i class="fas fa-check"></i> Optimización automática de costos</span>
+                        <span><i class="fas fa-check"></i> Backup y recuperación automática</span>
+                        <span><i class="fas fa-check"></i> Monitoreo de performance avanzado</span>
+                    </div>
+                    <div class="product-pricing">
+                        <span class="price">$199</span>
+                        <span class="period">/mes por proyecto</span>
+                    </div>
+                    <div class="product-actions">
+                        <a href="cloud-manager.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Ver Detalles
+                        </a>
+                        <a href="contacto.html" class="btn btn-outline">
+                            <i class="fas fa-play"></i>
+                            Probar Gratis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Comparación de Productos</h2>
+                <p class="section-subtitle">Elige la solución que mejor se adapte a tus necesidades empresariales</p>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <h3>Características por Producto</h3>
+                </div>
+                <div class="comparison-content">
+                    <div class="comparison-row">
+                        <div class="comparison-cell feature">Seguridad Avanzada</div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell feature">Análisis en Tiempo Real</div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell feature">Gestión Multi-Cloud</div>
+                        <div class="comparison-cell value"><i class="fas fa-times"></i></div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell feature">IA y Machine Learning</div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                    </div>
+                    <div class="comparison-row">
+                        <div class="comparison-cell feature">Soporte 24/7</div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                        <div class="comparison-cell value"><i class="fas fa-check"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para Revolucionar tu Empresa?</h2>
+            <p>Nuestros productos están diseñados para empresas que buscan innovación y eficiencia. Comienza tu prueba gratuita hoy mismo.</p>
+            <div class="cta-buttons">
+                <a href="contacto.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-rocket"></i>
+                    Comenzar Prueba Gratuita
+                </a>
+                <a href="../index.html" class="btn btn-outline btn-large">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeXora</h3>
+                    <p>Transformando el futuro con tecnología de vanguardia</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="security-suite.html">Security Suite</a></li>
+                        <li><a href="analytics.html">Analytics</a></li>
+                        <li><a href="cloud-manager.html">Cloud Manager</a></li>
+                        <li><a href="api-gateway.html">API Gateway</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> productos@nexora.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeXora. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>

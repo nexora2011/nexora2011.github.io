@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark light">
+    <title>Test Responsive - NeXora</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .test-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .test-info {
+            margin: 5px 0;
+        }
+        
+        .breakpoint-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 92, 246, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 9999;
+            display: none;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .show-breakpoint {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-info">Pantalla: <span id="screen-size"></span></div>
+        <div class="test-info">Breakpoint: <span id="breakpoint"></span></div>
+        <div class="test-info">Orientación: <span id="orientation"></span></div>
+        <div class="test-info">Táctil: <span id="touch-support"></span></div>
+        <div class="test-info">Pixel Ratio: <span id="pixel-ratio"></span></div>
+    </div>
+    
+    <div class="breakpoint-indicator" id="breakpoint-indicator">
+        <div id="breakpoint-text"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>NeXora</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#educacion">Educación</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary">Iniciar Sesión</button>
+                    <button class="btn btn-primary">Registrarse</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Test <span class="gradient-text">Responsive</span> 
+                    <br>Design
+                </h1>
+                <p class="hero-description">
+                    Esta es una página de prueba para verificar que el responsive design funcione correctamente en todos los dispositivos.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        Probar Responsive
+                    </button>
+                    <button class="btn btn-outline btn-large">
+                        <i class="fas fa-mobile-alt"></i>
+                        Ver Breakpoints
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <i class="fas fa-desktop"></i>
+                    <h4>Desktop</h4>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-tablet-alt"></i>
+                    <h4>Tablet</h4>
+                </div>
+                <div class="floating-card card-3">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Mobile</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educación Section -->
+    <section id="educacion" class="education">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Test Responsive</h2>
+                <p class="section-subtitle">Verifica que las tarjetas se adapten correctamente a diferentes tamaños de pantalla</p>
+            </div>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile First</h3>
+                    </div>
+                    <p>Diseño optimizado para dispositivos móviles con breakpoints profesionales</p>
+                    <ul class="education-features">
+                        <li><i class="fas fa-check"></i> Responsive completo</li>
+                        <li><i class="fas fa-check"></i> Breakpoints optimizados</li>
+                        <li><i class="fas fa-check"></i> Navegación móvil</li>
+                        <li><i class="fas fa-check"></i> Touch friendly</li>
+                    </ul>
+                    <button class="btn btn-outline">Ver Detalles</button>
+                </div>
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-tablet-alt"></i>
+                        </div>
+                        <h3>Tablet Ready</h3>
+                    </div>
+                    <p>Adaptación perfecta para tablets en orientación portrait y landscape</p>
+                    <ul class="education-features">
+                        <li><i class="fas fa-check"></i> Orientación adaptativa</li>
+                        <li><i class="fas fa-check"></i> Grid responsive</li>
+                        <li><i class="fas fa-check"></i> Touch gestures</li>
+                        <li><i class="fas fa-check"></i> Performance optimizado</li>
+                    </ul>
+                    <button class="btn btn-outline">Ver Detalles</button>
+                </div>
+                <div class="education-card">
+                    <div class="education-header">
+                        <div class="education-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Desktop Enhanced</h3>
+                    </div>
+                    <p>Experiencia premium en pantallas grandes con efectos avanzados</p>
+                    <ul class="education-features">
+                        <li><i class="fas fa-check"></i> Efectos parallax</li>
+                        <li><i class="fas fa-check"></i> Hover animations</li>
+                        <li><i class="fas fa-check"></i> Cursor personalizado</li>
+                        <li><i class="fas fa-check"></i> Partículas animadas</li>
+                    </ul>
+                    <button class="btn btn-outline">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instrucciones de prueba -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Cómo probar el responsive?</h2>
+                <p>1. Redimensiona la ventana del navegador<br>
+                   2. Usa las herramientas de desarrollador (F12)<br>
+                   3. Cambia entre dispositivos simulados<br>
+                   4. Rota tu dispositivo móvil</p>
+                <button class="btn btn-primary btn-large" id="test-breakpoint">
+                    <i class="fas fa-eye"></i>
+                    Mostrar Breakpoint Actual
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="JS/script.js"></script>
+    <script>
+        // Script de prueba para responsive
+        function updateTestInfo() {
+            const screenSize = document.getElementById('screen-size');
+            const breakpoint = document.getElementById('breakpoint');
+            const orientation = document.getElementById('orientation');
+            const touchSupport = document.getElementById('touch-support');
+            const pixelRatio = document.getElementById('pixel-ratio');
+            
+            // Tamaño de pantalla
+            screenSize.textContent = `${window.innerWidth} × ${window.innerHeight}`;
+            
+            // Breakpoint actual
+            let currentBreakpoint = 'Desktop';
+            if (window.innerWidth <= 320) currentBreakpoint = 'Mobile Extra Small';
+            else if (window.innerWidth <= 479) currentBreakpoint = 'Mobile Small';
+            else if (window.innerWidth <= 599) currentBreakpoint = 'Mobile Large';
+            else if (window.innerWidth <= 767) currentBreakpoint = 'Tablet Portrait';
+            else if (window.innerWidth <= 1023) currentBreakpoint = 'Tablet Landscape';
+            else if (window.innerWidth <= 1199) currentBreakpoint = 'Desktop';
+            else if (window.innerWidth <= 1439) currentBreakpoint = 'Large Desktop';
+            else currentBreakpoint = 'Extra Large Desktop';
+            
+            breakpoint.textContent = currentBreakpoint;
+            
+            // Orientación
+            orientation.textContent = window.innerWidth > window.innerHeight ? 'Landscape' : 'Portrait';
+            
+            // Soporte táctil
+            touchSupport.textContent = 'ontouchstart' in window ? 'Sí' : 'No';
+            
+            // Pixel ratio
+            pixelRatio.textContent = window.devicePixelRatio || 1;
+        }
+        
+        // Mostrar breakpoint actual
+        document.getElementById('test-breakpoint').addEventListener('click', function() {
+            const indicator = document.getElementById('breakpoint-indicator');
+            const text = document.getElementById('breakpoint-text');
+            
+            let currentBreakpoint = 'Desktop';
+            if (window.innerWidth <= 320) currentBreakpoint = 'Mobile Extra Small (≤320px)';
+            else if (window.innerWidth <= 479) currentBreakpoint = 'Mobile Small (≤479px)';
+            else if (window.innerWidth <= 599) currentBreakpoint = 'Mobile Large (≤599px)';
+            else if (window.innerWidth <= 767) currentBreakpoint = 'Tablet Portrait (≤767px)';
+            else if (window.innerWidth <= 1023) currentBreakpoint = 'Tablet Landscape (≤1023px)';
+            else if (window.innerWidth <= 1199) currentBreakpoint = 'Desktop (≤1199px)';
+            else if (window.innerWidth <= 1439) currentBreakpoint = 'Large Desktop (≤1439px)';
+            else currentBreakpoint = 'Extra Large Desktop (≥1440px)';
+            
+            text.textContent = currentBreakpoint;
+            indicator.classList.add('show-breakpoint');
+            
+            setTimeout(() => {
+                indicator.classList.remove('show-breakpoint');
+            }, 3000);
+        });
+        
+        // Actualizar información en tiempo real
+        window.addEventListener('resize', updateTestInfo);
+        window.addEventListener('orientationchange', updateTestInfo);
+        
+        // Inicializar
+        updateTestInfo();
+        
+        // Log de información del dispositivo
+        console.log('=== INFORMACIÓN DEL DISPOSITIVO ===');
+        console.log('User Agent:', navigator.userAgent);
+        console.log('Platform:', navigator.platform);
+        console.log('Language:', navigator.language);
+        console.log('Cookie Enabled:', navigator.cookieEnabled);
+        console.log('Online:', navigator.onLine);
+        console.log('Hardware Concurrency:', navigator.hardwareConcurrency);
+        console.log('Device Memory:', navigator.deviceMemory);
+        console.log('Connection:', navigator.connection);
+        console.log('Touch Support:', 'ontouchstart' in window);
+        console.log('Pixel Ratio:', window.devicePixelRatio);
+        console.log('Screen Size:', `${screen.width} × ${screen.height}`);
+        console.log('Available Screen:', `${screen.availWidth} × ${screen.availHeight}`);
+        console.log('Color Depth:', screen.colorDepth);
+        console.log('Orientation:', screen.orientation);
+        console.log('=====================================');
+    </script>
+</body>
+</html>
