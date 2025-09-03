@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark light">
+    <title>Programas Educativos - NeXora</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/educacion-index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: var(--gradient-primary);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .page-header h1 {
+            font-size: var(--font-size-5xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .breadcrumb i {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .education-overview {
+            padding: var(--spacing-2xl) 0;
+            background: rgba(22, 33, 62, 0.4);
+        }
+        
+        .education-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .education-section-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .education-section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .education-section-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .education-section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-cyan);
+        }
+        
+        .section-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-4xl);
+            color: white;
+            margin: 0 auto var(--spacing-lg);
+            transition: transform 0.3s ease;
+        }
+        
+        .education-section-card:hover .section-icon {
+            transform: scale(1.1);
+        }
+        
+        .section-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .section-subtitle {
+            color: var(--neon-cyan);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .section-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        .section-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+            text-align: left;
+        }
+        
+        .section-features li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+        
+        .section-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+        
+        .section-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .stats-section {
+            background: rgba(26, 26, 46, 0.5);
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: var(--spacing-lg);
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: var(--font-size-lg);
+        }
+        
+        .cta-section {
+            background: var(--gradient-secondary);
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .cta-section h2 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cta-section p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .education-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>NeXora</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../index.html#educacion">Educación</a></li>
+                    <li><a href="../index.html#servicios">Servicios</a></li>
+                    <li><a href="../index.html#productos">Productos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary">Iniciar Sesión</button>
+                    <button class="btn btn-primary">Registrarse</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Educación</span>
+            </div>
+            <h1>Programas Educativos</h1>
+            <p>Formación especializada para profesionales y empresas en tecnologías emergentes. Desarrolla las habilidades del futuro con NeXora.</p>
+        </div>
+    </section>
+
+    <!-- Education Overview -->
+    <section class="education-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestras Secciones Educativas</h2>
+                <p class="section-subtitle">Descubre nuestra oferta educativa completa dividida en tres áreas especializadas</p>
+            </div>
+            
+            <div class="education-sections">
+                <!-- NexEdu - Educación Académica -->
+                <div class="education-section-card">
+                    <div class="section-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="section-title">NexEdu</h3>
+                    <div class="section-subtitle">Educación Académica</div>
+                    <p class="section-description">
+                        Programas de formación académica tradicional y certificaciones reconocidas internacionalmente para profesionales que buscan validar sus conocimientos.
+                    </p>
+                    <ul class="section-features">
+                        <li>Certificaciones AWS, Azure, Google Cloud</li>
+                        <li>Programas de grado y posgrado</li>
+                        <li>Formación continua y actualización</li>
+                        <li>Validación de competencias</li>
+                        <li>Reconocimiento internacional</li>
+                    </ul>
+                    <div class="section-actions">
+                        <a href="nexedu.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Explorar NexEdu
+                        </a>
+                        <a href="contacto.html" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Información
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NexSkill - Habilidades de Alto Valor -->
+                <div class="education-section-card">
+                    <div class="section-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="section-title">NexSkill</h3>
+                    <div class="section-subtitle">Habilidades de Alto Valor</div>
+                    <p class="section-description">
+                        Desarrollo de habilidades blandas y competencias empresariales que marcan la diferencia en el mundo profesional actual.
+                    </p>
+                    <ul class="section-features">
+                        <li>Liderazgo y gestión de equipos</li>
+                        <li>Comunicación efectiva</li>
+                        <li>Pensamiento crítico y creativo</li>
+                        <li>Gestión de proyectos ágiles</li>
+                        <li>Inteligencia emocional</li>
+                    </ul>
+                    <div class="section-actions">
+                        <a href="nexskill.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Explorar NexSkill
+                        </a>
+                        <a href="contacto.html" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Información
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NexTech - Habilidades Tecnológicas -->
+                <div class="education-section-card">
+                    <div class="section-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="section-title">NexTech</h3>
+                    <div class="section-subtitle">Habilidades Tecnológicas</div>
+                    <p class="section-description">
+                        Formación práctica en tecnologías emergentes, programación, bases de datos y herramientas de desarrollo modernas.
+                    </p>
+                    <ul class="section-features">
+                        <li>Programación full-stack</li>
+                        <li>Bases de datos y SQL</li>
+                        <li>DevOps y automatización</li>
+                        <li>Machine Learning e IA</li>
+                        <li>Cloud computing</li>
+                    </ul>
+                    <div class="section-actions">
+                        <a href="nextech.html" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Explorar NexTech
+                        </a>
+                        <a href="contacto.html" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Información
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Impacto de Nuestros Programas</h2>
+                <p class="section-subtitle">Números que respaldan nuestra excelencia educativa</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Tasa de Satisfacción</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Profesionales Certificados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Empresas Atendidas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Tasa de Éxito en Certificaciones</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para Transformar tu Carrera?</h2>
+            <p>Únete a cientos de profesionales que ya han dado el siguiente paso con NeXora. Nuestros programas están diseñados para llevarte al siguiente nivel.</p>
+            <div class="cta-buttons">
+                <a href="contacto.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-phone"></i>
+                    Hablar con un Asesor
+                </a>
+                <a href="../index.html" class="btn btn-outline btn-large">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeXora</h3>
+                    <p>Transformando el futuro con tecnología de vanguardia</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Secciones Educativas</h4>
+                    <ul>
+                        <li><a href="nexedu.html">NexEdu - Educación Académica</a></li>
+                        <li><a href="nexskill.html">NexSkill - Habilidades de Alto Valor</a></li>
+                        <li><a href="nextech.html">NexTech - Habilidades Tecnológicas</a></li>
+                        <li><a href="recursos.html">Recursos Gratuitos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> educacion@nexora.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeXora. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>

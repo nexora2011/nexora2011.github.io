@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="color-scheme" content="dark light">
+    <title>NexTech - Habilidades Tecnológicas - NeXora</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/nextech.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .page-header h1 {
+            font-size: var(--font-size-5xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: white;
+        }
+        
+        .breadcrumb i {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .nextech-content {
+            padding: var(--spacing-2xl) 0;
+            background: rgba(22, 33, 62, 0.4);
+        }
+        
+        .nextech-intro {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .nextech-intro h2 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nextech-intro p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .tech-skills-section {
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .tech-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .tech-skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+        
+        .tech-skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-cyan);
+        }
+        
+        .tech-skill-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            color: white;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .tech-skill-card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .tech-skill-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+        
+        .tech-skill-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+            text-align: left;
+        }
+        
+        .tech-skill-features li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+        
+        .tech-skill-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+        
+        .platforms-section {
+            background: rgba(26, 26, 46, 0.5);
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .platform-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .platform-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--neon-cyan);
+        }
+        
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .platform-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            color: white;
+        }
+        
+        .platform-info h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: white;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .platform-info .platform-type {
+            color: var(--neon-cyan);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .platform-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        .platform-features {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .platform-features li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-xs);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+        
+        .platform-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+        }
+        
+        .platform-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+        
+        .cta-section {
+            background: var(--gradient-primary);
+            text-align: center;
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .cta-section h2 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .cta-section p {
+            font-size: var(--font-size-xl);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2>NeXora</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../index.html#educacion">Educación</a></li>
+                    <li><a href="../index.html#servicios">Servicios</a></li>
+                    <li><a href="../index.html#productos">Productos</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary">Iniciar Sesión</button>
+                    <button class="btn btn-primary">Registrarse</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html">Educación</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>NexTech</span>
+            </div>
+            <h1>NexTech - Habilidades Tecnológicas</h1>
+            <p>Formación práctica en tecnologías emergentes, programación, bases de datos y herramientas de desarrollo modernas para el futuro digital</p>
+        </div>
+    </section>
+
+    <!-- NexTech Content -->
+    <section class="nextech-content">
+        <div class="container">
+            <div class="nextech-intro">
+                <h2>Domina las Tecnologías del Futuro</h2>
+                <p>NexTech te prepara para el mundo digital con habilidades técnicas prácticas y actuales. Desde programación full-stack hasta inteligencia artificial, nuestros programas te convierten en un desarrollador competente y versátil, listo para enfrentar los desafíos tecnológicos del mañana.</p>
+            </div>
+
+            <!-- Tech Skills Section -->
+            <div class="tech-skills-section">
+                <div class="section-header">
+                    <h2 class="section-title">Habilidades Técnicas Clave</h2>
+                    <p class="section-subtitle">Competencias tecnológicas esenciales para desarrolladores del siglo XXI</p>
+                </div>
+                
+                <div class="tech-skills-grid">
+                    <div class="tech-skill-card">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Programación Full-Stack</h3>
+                        <p>Desarrolla aplicaciones web completas desde el frontend hasta el backend con las tecnologías más demandadas</p>
+                        <ul class="tech-skill-features">
+                            <li>Frontend: React, Vue.js, Angular</li>
+                            <li>Backend: Node.js, Python, Java</li>
+                            <li>Bases de datos: SQL y NoSQL</li>
+                            <li>APIs RESTful y GraphQL</li>
+                            <li>Arquitectura de microservicios</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Comenzar
+                        </a>
+                    </div>
+
+                    <div class="tech-skill-card">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Bases de Datos y SQL</h3>
+                    <p>Gestiona y optimiza bases de datos relacionales y no relacionales para aplicaciones escalables</p>
+                        <ul class="tech-skill-features">
+                            <li>MySQL, PostgreSQL, MongoDB</li>
+                            <li>Diseño de esquemas eficientes</li>
+                            <li>Optimización de consultas</li>
+                            <li>Backup y recuperación</li>
+                            <li>Seguridad de datos</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Comenzar
+                        </a>
+                    </div>
+
+                    <div class="tech-skill-card">
+                        <div class="tech-skill-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>DevOps y Automatización</h3>
+                        <p>Implementa prácticas DevOps modernas para acelerar el desarrollo y despliegue de aplicaciones</p>
+                        <ul class="tech-skill-features">
+                            <li>Docker y contenedores</li>
+                            <li>Kubernetes y orquestación</li>
+                            <li>CI/CD con Jenkins, GitLab</li>
+                            <li>Infraestructura como código</li>
+                            <li>Monitoreo y observabilidad</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Comenzar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="platforms-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Plataformas de Aprendizaje Tecnológico</h2>
+                <p class="section-subtitle">Accede a las mejores plataformas para desarrollar habilidades técnicas y de programación</p>
+            </div>
+            
+            <div class="platforms-grid">
+                <!-- CodeMaster Platform -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>CodeMaster</h3>
+                            <div class="platform-type">Plataforma de Programación</div>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        CodeMaster es la plataforma definitiva para aprender programación desde cero hasta nivel experto. Ofrece proyectos reales, mentoría personalizada y una comunidad global de desarrolladores.
+                    </p>
+                    <ul class="platform-features">
+                        <li>1000+ ejercicios prácticos</li>
+                        <li>Proyectos del mundo real</li>
+                        <li>Mentoría 1-on-1</li>
+                        <li>Comunidad de desarrolladores</li>
+                        <li>Certificaciones reconocidas</li>
+                    </ul>
+                    <div class="platform-actions">
+                        <a href="https://codemaster.dev" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar CodeMaster
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Info
+                        </a>
+                    </div>
+                </div>
+
+                <!-- DataFlow Platform -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>DataFlow</h3>
+                            <div class="platform-type">Plataforma de Datos</div>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        DataFlow se especializa en ciencia de datos, bases de datos y análisis. Aprende SQL, NoSQL, machine learning y visualización de datos con proyectos prácticos.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Curso completo de SQL</li>
+                        <li>MongoDB y bases NoSQL</li>
+                        <li>Machine Learning básico</li>
+                        <li>Visualización con Tableau</li>
+                        <li>Proyectos de análisis reales</li>
+                    </ul>
+                    <div class="platform-actions">
+                        <a href="https://dataflow.tech" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar DataFlow
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Info
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CloudForge Platform -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="platform-info">
+                            <h3>CloudForge</h3>
+                            <div class="platform-type">Plataforma de Cloud & DevOps</div>
+                        </div>
+                    </div>
+                    <p class="platform-description">
+                        CloudForge es la plataforma líder en formación de DevOps y computación en la nube. Domina Docker, Kubernetes, AWS, Azure y prácticas de automatización modernas.
+                    </p>
+                    <ul class="platform-features">
+                        <li>Docker y contenedores</li>
+                        <li>Kubernetes avanzado</li>
+                        <li>Multi-cloud: AWS, Azure, GCP</li>
+                        <li>CI/CD y automatización</li>
+                        <li>Infraestructura como código</li>
+                    </ul>
+                    <div class="platform-actions">
+                        <a href="https://cloudforge.io" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar CloudForge
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            Más Info
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para Convertirte en un Desarrollador del Futuro?</h2>
+            <p>Las habilidades tecnológicas son la moneda del futuro digital. Únete a NexTech y construye tu carrera en el mundo de la tecnología con las competencias más demandadas del mercado.</p>
+            <div class="cta-buttons">
+                <a href="contacto.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-phone"></i>
+                    Hablar con un Asesor
+                </a>
+                <a href="index.html" class="btn btn-outline btn-large">
+                    <i class="fas fa-arrow-left"></i>
+                    Volver a Educación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NeXora</h3>
+                    <p>Transformando el futuro con tecnología de vanguardia</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Secciones Educativas</h4>
+                    <ul>
+                        <li><a href="nexedu.html">NexEdu - Educación Académica</a></li>
+                        <li><a href="nexskill.html">NexSkill - Habilidades de Alto Valor</a></li>
+                        <li><a href="nextech.html">NexTech - Habilidades Tecnológicas</a></li>
+                        <li><a href="recursos.html">Recursos Gratuitos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> educacion@nexora.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NeXora. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+</body>
+</html>
